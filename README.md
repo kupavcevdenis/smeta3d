@@ -1,2 +1,2 @@
 # smeta3d
-Application for smeta
+Application for smeta3d
