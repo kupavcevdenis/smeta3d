@@ -38,6 +38,8 @@ project( ${PROJECT_NAME_SMT3D} )
 set(SMT3D_SRC_DIR ${${PROJECT_NAME_SMT3D}_SOURCE_DIR})
 set(SMT3D_BUILD_DIR ${${PROJECT_NAME_SMT3D}_BINARY_DIR})
 
+include(cmake/find_dependencies.cmake)
+
 ###################################################################
 ## determine if we are compiling for a 32bit or 64bit system
 ## it's did not work ???
