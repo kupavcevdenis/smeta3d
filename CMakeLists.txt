@@ -8,6 +8,7 @@
 ######################################################################################
 
 cmake_minimum_required(VERSION 2.8.1 FATAL_ERROR)
+cmake_policy(VERSION 2.8.1)
 
 ######################################################################################
 set(CMAKE_VERBOSE_MAKEFILE false)           # high verbosity setting in make files and VS
@@ -17,6 +18,10 @@ set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true) # Allow empty endif() and such with 
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "Predefined (Cmake) targets folder" )
+
+######################################################################
+# Just debug / release since that's all that's included in SDK
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" )
 
 #####################################################################
 # Setup version build 
@@ -38,8 +43,47 @@ project( ${PROJECT_NAME_SMT3D} )
 set(SMT3D_SRC_DIR ${${PROJECT_NAME_SMT3D}_SOURCE_DIR})
 set(SMT3D_BUILD_DIR ${${PROJECT_NAME_SMT3D}_BINARY_DIR})
 
-include(cmake/find_dependencies.cmake)
+set( CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake"
+                       "${CMAKE_MODULE_PATH}" )
 
+					   
+enable_language(C)
+enable_language(CXX)
+		
+
+##   set(WINVER "0x0501" CACHE STRING "WINVER version (see MSDN documentation)") #Windows XP and newer
+   add_definitions(-DPSAPI_VERSION=1) #compatibility Windows XP for build in Windows 7
+
+   # Replace /INCREMENTAL:NO[YES] by /INCREMENTAL:NO.
+   string(REGEX REPLACE "/INCREMENTAL[0-Y]*" "" CMAKE_EXE_LINKER_FLAGS_DEBUG    "${CMAKE_EXE_LINKER_FLAGS_DEBUG}" ) 
+   string(REGEX REPLACE "/INCREMENTAL[0-Y]*" "" CMAKE_SHARED_LINKER_FLAGS_DEBUG "${CMAKE_SHARED_LINKER_FLAGS_DEBUG}" ) 
+   string(REGEX REPLACE "/INCREMENTAL[0-Y]*" "" CMAKE_MODULE_LINKER_FLAGS_DEBUG "${CMAKE_MODULE_LINKER_FLAGS_DEBUG}" ) 
+
+   set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /INCREMENTAL:NO")
+   set(CMAKE_SHARED_LINKER_FLAGS_DEBUG "${CMAKE_SHARED_LINKER_FLAGS_DEBUG} /INCREMENTAL:NO")
+   set(CMAKE_MODULE_LINKER_FLAGS_DEBUG "${CMAKE_MODULE_LINKER_FLAGS_DEBUG} /INCREMENTAL:NO")
+
+if (MSVC_VERSION GREATER 1599)
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP") # Multi-processor Compilation
+elseif(CMAKE_SIZEOF_VOID_P EQUAL 8) # x64
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_WIN64")
+   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_WIN64")
+endif()
+
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zm300") #error C3859: virtual memory range for PCH exceeded
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 /EHa /fp:except-") #high warning level with C++ and SEH exceptions
+   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Oi") # Enable intrinsics on MSVC in debug mode
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj") # increases the number of sections that an object file can contain.
+
+   if (CMAKE_SIZEOF_VOID_P EQUAL 8) #x64
+      set( GLOB_LINKER_FLAGS "${GLOB_LINKER_FLAGS} /MACHINE:X64" )
+   else()
+      set( GLOB_LINKER_FLAGS "${GLOB_LINKER_FLAGS} /MACHINE:X86 /LARGEADDRESSAWARE" )
+   endif()
+		
+include(find_dependencies)
+
+add_subdirectory( "source/project" "source/project" ) #Library's location
 ###################################################################
 ## determine if we are compiling for a 32bit or 64bit system
 ## it's did not work ???

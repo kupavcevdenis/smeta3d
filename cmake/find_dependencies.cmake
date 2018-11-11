@@ -1,21 +1,16 @@
+####################################################################################
+# Find Qt5
+####################################################################################
+ if(MSVC)# look for user-registry pointing to qtcreator
+    get_filename_component(QT_BIN [HKEY_CURRENT_USER\\Software\\Classes\\Applications\\QtProject.QtCreator.cpp\\shell\\Open\\Command] PATH)# get root path so we can search for 5.3, 5.4, 5.5, etc
+    string(REPLACE "/Tools" ";" QT_BIN "${QT_BIN}")
+    list(GET QT_BIN 0 QT_BIN) 
+	file(GLOB QT_VERSIONS "${QT_BIN}/5.*")
+    list(SORT QT_VERSIONS)# assume the latest version will be last alphabetically
+    list(REVERSE QT_VERSIONS)
 
-#set(CMAKE_PREFIX_PATH "C:/Qt/Qt5.11.2/5.11.2/msvc2017_64" ${CMAKE_PREFIX_PATH})
-
-   ############
-   # Find Qt5
-   
-
-IF(MSVC)# look for user-registry pointing to qtcreator
-    GET_FILENAME_COMPONENT(QT_BIN [HKEY_CURRENT_USER\\Software\\Classes\\Applications\\QtProject.QtCreator.cpp\\shell\\Open\\Command] PATH)# get root path so we can search for 5.3, 5.4, 5.5, etc
-	message(GOOOOOOOOOOOD)
-    STRING(REPLACE "/Tools" ";" QT_BIN "${QT_BIN}")
-    LIST(GET QT_BIN 0 QT_BIN) 
-	FILE(GLOB QT_VERSIONS "${QT_BIN}/5.*")
-    LIST(SORT QT_VERSIONS)# assume the latest version will be last alphabetically
-    LIST(REVERSE QT_VERSIONS)
-
-    LIST(GET QT_VERSIONS 0 QT_VERSION)# fix any double slashes which seem to be common
-    STRING(REPLACE "//""/"  QT_VERSION "${QT_VERSION}")# do some math trickery to guess folder# - qt uses (e.g.) "msvc2012"# - cmake uses (e.g.) "1800"# - see also https://cmake.org/cmake/help/v3.0/variable/MSVC_VERSION.html
+    list(GET QT_VERSIONS 0 QT_VERSION)# fix any double slashes which seem to be common
+    string(REPLACE "//""/"  QT_VERSION "${QT_VERSION}")# do some math trickery to guess folder# - qt uses (e.g.) "msvc2012"# - cmake uses (e.g.) "1800"# - see also https://cmake.org/cmake/help/v3.0/variable/MSVC_VERSION.html
 	message(MSVC_VERSION " : ${MSVC_VERSION}")
 	
 	if(MSVC_VERSION GREATER 1999)
@@ -26,18 +21,23 @@ IF(MSVC)# look for user-registry pointing to qtcreator
 	
     
     message(QT_MSVC " : ${QT_MSVC}")
-	IF(CMAKE_SYSTEM_PROCESSOR MATCHES 64)
-        SET(QT_MSVC "${QT_MSVC}_64")
-    ENDIF()
-    SET(QT_PATH "${QT_VERSION}/msvc${QT_MSVC}")
+	if(CMAKE_SYSTEM_PROCESSOR MATCHES 64)
+        set(QT_MSVC "${QT_MSVC}_64")
+    endif()
+    set(QT_PATH "${QT_VERSION}/msvc${QT_MSVC}")
 		message(QT_PATH " : ${QT_PATH}")
 	set(CMAKE_PREFIX_PATH ${QT_PATH} ${CMAKE_PREFIX_PATH})
 
 	
-ENDIF()# use Qt_DIR approach so you can find Qt after cmake has been invoked
+endif()# use Qt_DIR approach so you can find Qt after cmake has been invoked
 
    
-   find_package(Qt5 COMPONENTS Core) # REQUIRED QUIET
+   find_package(Qt5 COMPONENTS Core Gui Widgets) # REQUIRED QUIET
+   
+
+####################################################################################
+# Find Qt5
+####################################################################################
 
 #   if (Qt5_FOUND)   
 #      set(QT_COMPONENTS Core Gui Widgets Xml Sql Network  OpenGL Svg Quick Qml PrintSupport Designer)
