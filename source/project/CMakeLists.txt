@@ -3,9 +3,17 @@
 
 file(GLOB PRIVATE_HEADERS *.h)
 file(GLOB SOURCES *.cpp)
+file(GLOB FORM_FILES *.ui)
 
 list(SORT PRIVATE_HEADERS)
 list(SORT SOURCES)
+
+
+qt5_wrap_cpp(MOC_OUT ${PRIVATE_HEADERS})
+qt5_wrap_ui(UI_OUT ${FORM_FILES})
+
+message(MOC_OUT " : ${MOC_OUT}")
+message(UI_OUT " : ${UI_OUT}")
 
 set(ADDITION_COMPILE_FLAGS "-DMY_EXE")
 set(ADDITION_LINK_FLAGS "")
@@ -15,7 +23,7 @@ if(MSVC)
    set(_WIN32 "WIN32")
 endif()
 
-add_executable(my_project ${_WIN32} ${PRIVATE_HEADERS} ${SOURCES} ) 
+add_executable(my_project ${_WIN32} ${PRIVATE_HEADERS} ${SOURCES} ${MOC_OUT} ${UI_OUT}) 
 ##set_executable_output_postfix( my_project)
 #set_version_and_label( ${CURRENT_LIBRARY_NAME} )
 set_target_properties( my_project PROPERTIES 
@@ -24,3 +32,9 @@ set_target_properties( my_project PROPERTIES
                        ENABLE_EXPORTS FALSE
 )
 
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
+message(Qt5Widgets_LIBRARIES ": ${Qt5Widgets_LIBRARIES}")
+set(LIBRARIES ${Qt5Widgets_LIBRARIES} )
+
+target_link_libraries(my_project ${LIBRARIES})
