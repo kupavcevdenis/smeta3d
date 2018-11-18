@@ -83,7 +83,11 @@ endif()
 		
 include(find_dependencies)
 
-add_subdirectory( "source/project" "source/project" ) #Library's location
+include_directories(${CMAKE_SOURCE_DIR}/include)
+
+add_subdirectory( "source/run" "source/run" ) #Library's location
+add_subdirectory( "source/kernel" "source/kernel" ) #Library's location
+add_subdirectory( "source/gui_basis" "source/gui_basis" ) #Library's location
 ###################################################################
 ## determine if we are compiling for a 32bit or 64bit system
 ## it's did not work ???
