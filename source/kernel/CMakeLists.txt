@@ -12,8 +12,6 @@ add_library(kernel SHARED ${_WIN32} ${PRIVATE_HEADERS} ${SOURCES})
 #set_version_and_label( ${CURRENT_LIBRARY_NAME} )
 set_target_properties( kernel PROPERTIES 
                        COMPILE_FLAGS "${ADDITION_COMPILE_FLAGS}"
-                       LINK_FLAGS "${ADDITION_LINK_FLAGS}"
-                       ENABLE_EXPORTS FALSE
 )
 
 
