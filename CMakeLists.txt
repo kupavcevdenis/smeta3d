@@ -49,7 +49,10 @@ set( CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake"
 					   
 enable_language(C)
 enable_language(CXX)
-		
+
+include(make_default_output_directory)
+
+make_default_output_directory( ${PROJECT_BINARY_DIR} ) 		
 
 ##   set(WINVER "0x0501" CACHE STRING "WINVER version (see MSDN documentation)") #Windows XP and newer
    add_definitions(-DPSAPI_VERSION=1) #compatibility Windows XP for build in Windows 7
