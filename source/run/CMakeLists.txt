@@ -35,6 +35,6 @@ set_target_properties( run PROPERTIES
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 message(Qt5Widgets_LIBRARIES ": ${Qt5Widgets_LIBRARIES}")
-set(LIBRARIES ${Qt5Widgets_LIBRARIES} gui_basis)
+set(LIBRARIES ${Qt5Widgets_LIBRARIES} gui_basis kernel)
 
 target_link_libraries(run ${LIBRARIES})

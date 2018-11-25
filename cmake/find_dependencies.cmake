@@ -35,8 +35,8 @@ endif()# use Qt_DIR approach so you can find Qt after cmake has been invoked
    find_package(Qt5 COMPONENTS Core Gui Widgets) # REQUIRED QUIET
    
    
-   set(REQ_MOD thread system iostreams filesystem program_options date_time regex)
-   find_package( Boost 1.62.0 COMPONENTS ${REQ_MOD} REQUIRED)
+ #  set(REQ_MOD thread system iostreams filesystem program_options date_time regex)
+ #  find_package( Boost 1.62.0 COMPONENTS ${REQ_MOD} REQUIRED)
 
 ####################################################################################
 # Find Qt5
