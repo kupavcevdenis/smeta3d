@@ -3,11 +3,11 @@
 #include <QPainter>
 #include <QMainWindow>
 #include <QStatusBar>
-
+#include "kernel/ifc/ICore.h"
 CContext::CContext(QWidget* pParent):
 QWidget(pParent)
 {
-	setAttribute(Qt::WA_PaintOnScreen);
+	//setAttribute(Qt::WA_PaintOnScreen);
 	m_TimerID_25  = startTimer( 0 );
 	m_Time.start();
 	countframe = 0;
@@ -22,17 +22,17 @@ CContext::~CContext()
 void CContext::timerEvent(QTimerEvent *pEvent)
 { 
 	float fTimePerFrame = m_Time.restart();
-	Core* pCore = GetSingltonCore();
-	if(pCore && pCore->IsInit())
-		pCore->Simulate(fTimePerFrame);
+	smeta3d::SP_ICore ptrCore = smeta3d::GetSingltonCore();
+	/*if(ptrCore && ptrCore->IsInit())
+		ptrCore->Simulate(fTimePerFrame);*/
 	
 	countframe++;
 	sec += fTimePerFrame;
 	if(sec > 1000.f)
 	{
-		//QPainter p(this);
-		//p.setBrush(QBrush(QColor(255,255,255)));
-		//p.drawText(100,100,QString("%1").arg(countframe));
+	    QPainter p(this);
+		p.setBrush(QBrush(QColor(255,255,255)));
+		p.drawText(100,100,QString("%1").arg(countframe));
 		qobject_cast<QMainWindow*>(parentWidget())->statusBar()->showMessage(QString("%1").arg(countframe));
 		countframe = 0;
 		sec = 0;
@@ -41,10 +41,11 @@ void CContext::timerEvent(QTimerEvent *pEvent)
 }
 void CContext::resizeEvent(QResizeEvent *evnt)
 {
-	Core* pCore = GetSingltonCore();
-	if(pCore && pCore->IsInit())
-		pCore->Resize(this->width(), this->height());
+	smeta3d::SP_ICore ptrCore = smeta3d::GetSingltonCore();
+	/*if(ptrCore && ptrCore->IsInit())
+		ptrCore->Resize(this->width(), this->height());*/
 }
+/*
 void CContext::keyPressEvent(QKeyEvent *evn)
 {
 	Core* pCore = GetSingltonCore();
@@ -110,6 +111,6 @@ bool CContext::event(QEvent *evn)
 	}
 
 	return QWidget::event(evn);
-}
+}*/
 
 

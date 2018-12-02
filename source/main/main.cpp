@@ -2,18 +2,22 @@
 #include "gui_basis/mainwindow.h"
 #include "kernel/ifc/ICore.h"
 
+#include "Context.h"
 
 using namespace smeta3d;
 
 int main(int argc, char *argv[])
 {
-	QApplication a(argc, argv);
-	
-	CMainWindow w;
+	QApplication a(argc, argv);	
 
 	SP_ICore ptrCore = GetSingltonCore();
 
 	ptrCore->Init();
+
+	CMainWindow w;
+
+	CContext* context = new CContext(&w);
+	w.setCentralWidget(context);
 
 	w.show();
 	int nRet = a.exec();

@@ -1,7 +1,7 @@
 #ifndef CContext_H
 #define CContext_H
 #include <QWidget>
-#include "Core.h"
+#include <QTime>
 #include <qdatetime.h>
 class CContext : public QWidget
 {
@@ -11,9 +11,9 @@ public:
 	void timerEvent(QTimerEvent *pEvent);
 	virtual void resizeEvent(QResizeEvent *);
 	QPaintEngine *paintEngine() const {return NULL;}
-	void keyPressEvent(QKeyEvent *);
+	/*void keyPressEvent(QKeyEvent *);
     void keyReleaseEvent(QKeyEvent *);
-	bool event(QEvent *);
+	bool event(QEvent *);*/
 private:
 	
 	int m_TimerID_25;

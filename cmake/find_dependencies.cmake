@@ -37,6 +37,8 @@ endif()# use Qt_DIR approach so you can find Qt after cmake has been invoked
    
  #  set(REQ_MOD thread system iostreams filesystem program_options date_time regex)
  #  find_package( Boost 1.62.0 COMPONENTS ${REQ_MOD} REQUIRED)
+ 
+ find_package(OpenGL)
 
 ####################################################################################
 # Find Qt5
