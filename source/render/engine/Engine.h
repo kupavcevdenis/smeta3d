@@ -1,24 +1,15 @@
-#ifndef GLContex_H_
-#define GLContex_H_
+#ifndef ENGINE_H_
+#define ENGINE_H_
 
-#include <windows.h>
-#include "Shader.h"
+#include "render/engine/ifc/IEngine.h"
 
-   class GLContext
+class CEngine : public IEngine
    {
    public:
-      GLContext(const HWND& HWnd);
-      ~GLContext();
-	  void Clear();
-	  void Swap();
-	  void Resize(int w, int h);
-	  void InitShader();
-
-   private:
-	   bool CreateContext(const HWND& HWnd);
-   private:
-	   struct SAppContext* m_pAppContext;
-	   Shader* m_pShader;
+	   CEngine();
+      ~CEngine();
+	
+	  DECL_PUBLIC_IENGINE
 
 
    };

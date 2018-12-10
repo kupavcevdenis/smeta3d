@@ -7,7 +7,7 @@
 CContext::CContext(QWidget* pParent):
 QWidget(pParent)
 {
-	//setAttribute(Qt::WA_PaintOnScreen);
+	setAttribute(Qt::WA_PaintOnScreen);
 	m_TimerID_25  = startTimer( 0 );
 	m_Time.start();
 	countframe = 0;
