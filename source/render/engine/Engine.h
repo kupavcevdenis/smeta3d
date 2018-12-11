@@ -3,15 +3,17 @@
 
 #include "render/engine/ifc/IEngine.h"
 
-class CEngine : public IEngine
-   {
-   public:
-	   CEngine();
-      ~CEngine();
-	
-	  DECL_PUBLIC_IENGINE
+namespace engine_smeta3d
+{
+	class CEngine : public IEngine
+	{
+	public:
+		CEngine();
+		~CEngine();
+
+		DECL_PUBLIC_IENGINE
 
 
-   };
-
+	};
+}
 #endif /* GLContex_H_ */
