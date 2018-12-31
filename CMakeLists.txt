@@ -84,6 +84,8 @@ endif()
       set( GLOB_LINKER_FLAGS "${GLOB_LINKER_FLAGS} /MACHINE:X86 /LARGEADDRESSAWARE" )
    endif()
 		
+		message(!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Boost_DEBUG ": ${Boost_DEBUG}")
+		
 include(find_dependencies)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
@@ -94,6 +96,7 @@ add_subdirectory( "source/gui_basis" "source/gui_basis" ) #Library's location
 
 add_subdirectory( "source/render/engine" "source/render/engine" ) #Library's location
 add_subdirectory( "source/render/extern/glew" "source/render/extern/glew" ) #Library's location
+add_subdirectory( "source/test/" "source/test/" ) #Library's location
 ###################################################################
 ## determine if we are compiling for a 32bit or 64bit system
 ## it's did not work ???
