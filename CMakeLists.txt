@@ -90,6 +90,8 @@ include(find_dependencies)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
+add_subdirectory( "source/system" "source/system" ) #Library's location
+
 add_subdirectory( "source/main" "source/main" ) #Library's location
 add_subdirectory( "source/basis/base_kernel_impl" "source/basis/base_kernel_impl" ) #Library's location
 add_subdirectory( "source/gui_basis" "source/gui_basis" ) #Library's location

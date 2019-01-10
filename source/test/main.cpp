@@ -126,22 +126,104 @@ struct TrackedHelloWorld
 };
 
 
-
-class CSignalManager final
+struct SPaintData
 {
-public:
-	CSignalManager() {};
-
-
-private:
-
-
-
+	SPaintData() {};
 };
 
 
+enum class ETypeSignal
+{
+	eTS_Unknown,
+	eTS_Paint
+    
+};
+
+bool Test()
+{
+	bool b = 0;
+	return false;
+}
+
+
+
+
+
+/*class CSignalPaint : public CSignal 
+{
+public:
+	CSignalPaint() {};
+	virtual ETypeSignal Type() const { return ETypeSignal::eTS_Paint; }
+
+public:
+
+	using internal_signal = boost::signals2::signal<void(const SPaintData&)>;
+	internal_signal m_signal;
+
+	static bool m_bReg;
+};
+
+bool CSignalPaint::m_bReg = Test();
+*/
+class IEvent
+{
+};
+
+
+template <class C, class E, void (C::*Method)(E*)>
+static void method_stub(void* object_ptr, IEvent* value)
+{
+	C* p = static_cast<C*>(object_ptr);
+	E* e = static_cast<E*>(value);
+	(p->*Method)(e); // #2
+}
+
+
+class E: public IEvent
+{
+
+};
+
+class C
+{
+public:
+	void f(E*)
+	{
+		int e = 0;
+	}
+};
+
+
+class D
+{
+public:
+
+	void f0(E*)
+	{
+		int e = 0;
+	}
+
+	void f1(E*)
+	{
+		int e = 0;
+	}
+};
+
+typedef void(*stub_type)(void*, IEvent*);
+
+stub_type stub_ptr1 = &method_stub<C, E, &C::f>; // #1
+stub_type stub_ptr2 = &method_stub<D, E, &D::f1>; // #2
+stub_type stub_ptr3 = &method_stub<C, E, &C::f>; // #1
+
 int main()
 {
+
+	C c;
+	E e;
+	(*stub_ptr1)(&c, &e);
+	(*stub_ptr2)(&c, &e);
+
+
 	// Сигнал, принимающий 1 целочисленный аргумент и возвращающий void
 	boost::signals2::signal<void(int)> sig;
 

@@ -15,7 +15,7 @@ namespace smeta3d
 			virtual bool IsInit() const  = 0;
 			virtual void DeInit() = 0;
 
-			virtual const engine_smeta3d::SP_IEngine& GetEngine() const  = 0;
+			virtual const smeta3d::SP_IEngine& GetEngine() const  = 0;
 	};
 
 
@@ -30,6 +30,6 @@ namespace smeta3d
 		bool Init(); \
         bool IsInit() const; \
         void DeInit(); \
-	    const engine_smeta3d::SP_IEngine& GetEngine() const;
+	    const smeta3d::SP_IEngine& GetEngine() const;
 
 #endif

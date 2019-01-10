@@ -31,7 +31,7 @@ namespace smeta3d
 		if (IsInit())
 			return false;
 
-		engine_smeta3d::SP_IEngine ptrEngine = GetEngine();
+		smeta3d::SP_IEngine ptrEngine = GetEngine();
 		if (ptrEngine)
 			ptrEngine->Init();
 
@@ -51,7 +51,7 @@ namespace smeta3d
 		if (!IsInit())
 			return;
 
-		engine_smeta3d::SP_IEngine ptrEngine = GetEngine();
+		smeta3d::SP_IEngine ptrEngine = GetEngine();
 		if (ptrEngine)
 			ptrEngine->DeInit();
 
@@ -59,8 +59,8 @@ namespace smeta3d
 	}
 	/////////////////////////////////////////////////////////////////////
 	///
-	const engine_smeta3d::SP_IEngine& CCore::GetEngine() const
+	const smeta3d::SP_IEngine& CCore::GetEngine() const
 	{
-		return engine_smeta3d::GetSingltonEngine();
+		return smeta3d::GetSingltonEngine();
 	}
 }

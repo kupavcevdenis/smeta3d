@@ -3,7 +3,7 @@
 
 #include "render/engine/ifc/IEngine.h"
 
-namespace engine_smeta3d
+namespace smeta3d
 {
 	class CEngine : public IEngine
 	{

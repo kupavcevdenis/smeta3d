@@ -4,7 +4,7 @@
 
 #include <memory>
 
-namespace engine_smeta3d
+namespace smeta3d
 {
 
 	class IEngine
