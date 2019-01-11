@@ -54,7 +54,7 @@ namespace smeta3d
    \brief Класс "Менеджер событий".
    Отвечает за хранение зарегистрированной информации и рассылку адресатам
    */
-   class CEventManager
+   class __declspec(dllexport) CEventManager
    {
    public:
 	   CEventManager();
@@ -90,14 +90,14 @@ namespace smeta3d
       {
          Conversion<ES,ER>((ES*)0); // Проверка конвертации E в P
          TEventCallBack handler_func = TEventCallBack::from_method<C, ER, Method>(pListener);
-         connectEvent(ES::GetCurrentEID(), anySender, pSender, anyReceiver, pReceiver, handler_func);
+         connectEvent(ES::GetCurrentID(), anySender, pSender, anyReceiver, pReceiver, handler_func);
       }
 
       ///
       template <class ES, class C >
       void disconnectEvent(C *pListener)
       {
-         disconnectEvent(ES::GetCurrentEID(), pListener);
+         disconnectEvent(ES::GetCurrentID(), pListener);
       }
 
    protected:

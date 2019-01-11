@@ -1,13 +1,12 @@
 #ifndef _IEVENT_
 #define _IEVENT_
 
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_generators.hpp>
+#include <system/uuid.h>
 
 namespace smeta3d
 {
 
-	using event_id = boost::uuids::uuid;
+	using event_id = CUUID;
 
 	class IEvent
 	{
@@ -16,20 +15,19 @@ namespace smeta3d
 		virtual const event_id& GetID() const = 0;
 	};
 
-#define DECL_EVENT(CLASS_EVENT) \
-   public: \
-     static const event_id& GetCurrentID() \
-     { \
-	   static event_id s_id = boost::uuids::string_generator(CLASS_EVENT##_STR); \
-       return s_id; \
-     } \
-     virtual const event_id& GetID() \
-     { \
-       return CLASS_EVENT::GetCurrentID(); \
-     } \
    
 } // end namespace smeta3d
 
-
+#define DECL_EVENT(CLASS_EVENT) \
+   public: \
+     static const smeta3d::event_id& GetCurrentID() \
+     { \
+	   static smeta3d::event_id s_id = smeta3d::CUUID(CLASS_EVENT##_STR); \
+       return s_id; \
+     } \
+     virtual const smeta3d::event_id& GetID() const \
+     { \
+       return CLASS_EVENT::GetCurrentID(); \
+     } \
 
 #endif // _IEVENT_

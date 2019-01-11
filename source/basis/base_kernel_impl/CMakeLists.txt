@@ -17,6 +17,6 @@ set_target_properties( kernel PROPERTIES
 
 
 #message(Qt5Widgets_LIBRARIES ": ${Qt5Widgets_LIBRARIES}")
-set(LIBRARIES engine)
+set(LIBRARIES engine system)
 
 target_link_libraries(kernel ${LIBRARIES})

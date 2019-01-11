@@ -1,5 +1,7 @@
 #include "system/event_manager.h"
 
+#include <cassert>
+
 namespace smeta3d
 {
 
