@@ -16,6 +16,9 @@ namespace smeta3d
 			virtual void DeInit() = 0;
 
 			virtual const smeta3d::SP_IEngine& GetEngine() const  = 0;
+
+			virtual void Simulate(float fTimePerSec) = 0;
+			virtual void Resize(int w, int h) = 0;
 	};
 
 
@@ -30,6 +33,9 @@ namespace smeta3d
 		bool Init(); \
         bool IsInit() const; \
         void DeInit(); \
-	    const smeta3d::SP_IEngine& GetEngine() const;
+	    const smeta3d::SP_IEngine& GetEngine() const; \
+	    void Simulate(float fTimePerSec); \
+        void Resize(int w, int h);
+
 
 #endif

@@ -15,6 +15,7 @@ namespace smeta3d
 
 	public:
 
+		smeta3d::SP_IEngine m_ptrEngine;
 		bool m_bInit;
 
 	};

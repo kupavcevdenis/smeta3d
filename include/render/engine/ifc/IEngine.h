@@ -16,6 +16,14 @@ namespace smeta3d
 		virtual bool IsInit() const = 0;
 		virtual void DeInit() = 0;
 
+		virtual void Update(float fTimePerSec) = 0;
+
+		virtual void BeginRender() = 0;
+		virtual void Render() = 0;
+		virtual void EndRender() = 0;
+
+		virtual void Resize(int w, int h) = 0;
+
 
 
 	};
@@ -27,7 +35,13 @@ namespace smeta3d
 #define DECL_PUBLIC_IENGINE \
 		bool Init(); \
         bool IsInit() const; \
-        void DeInit();
+        void DeInit(); \
+	    void Update(float fTimePerSec); \
+        void BeginRender(); \
+        void Render(); \
+        void EndRender(); \
+        void Resize(int w, int h);
+
 
 
 

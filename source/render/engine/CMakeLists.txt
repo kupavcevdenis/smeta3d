@@ -24,6 +24,6 @@ set_target_properties( engine PROPERTIES
 
 
 #message(Qt5Widgets_LIBRARIES ": ${Qt5Widgets_LIBRARIES}")
-#set(LIBRARIES ${Qt5Widgets_LIBRARIES} )
+set(LIBRARIES glew )
 
-#target_link_libraries(kernel ${LIBRARIES})
+target_link_libraries(kernel ${LIBRARIES})

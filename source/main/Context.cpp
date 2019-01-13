@@ -23,8 +23,8 @@ void CContext::timerEvent(QTimerEvent *pEvent)
 { 
 	float fTimePerFrame = m_Time.restart();
 	smeta3d::SP_ICore ptrCore = smeta3d::GetSingltonCore();
-	/*if(ptrCore && ptrCore->IsInit())
-		ptrCore->Simulate(fTimePerFrame);*/
+	if(ptrCore && ptrCore->IsInit())
+		ptrCore->Simulate(fTimePerFrame);
 	
 	countframe++;
 	sec += fTimePerFrame;
@@ -42,8 +42,8 @@ void CContext::timerEvent(QTimerEvent *pEvent)
 void CContext::resizeEvent(QResizeEvent *evnt)
 {
 	smeta3d::SP_ICore ptrCore = smeta3d::GetSingltonCore();
-	/*if(ptrCore && ptrCore->IsInit())
-		ptrCore->Resize(this->width(), this->height());*/
+	if(ptrCore && ptrCore->IsInit())
+		ptrCore->Resize(this->width(), this->height());
 }
 /*
 void CContext::keyPressEvent(QKeyEvent *evn)
