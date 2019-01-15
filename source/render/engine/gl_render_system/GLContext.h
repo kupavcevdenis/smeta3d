@@ -6,7 +6,7 @@
 
 namespace smeta3d
 {
-	class GLContext
+	class GLContext : public IContext
 	{
 	public:
 		GLContext(const HWND& HWnd);

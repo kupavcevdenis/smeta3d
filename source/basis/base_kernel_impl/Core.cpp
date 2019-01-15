@@ -26,14 +26,14 @@ namespace smeta3d
 
 	/////////////////////////////////////////////////////////////////////
 	///
-	bool CCore::Init()
+	bool CCore::Init(const HWND& HWnd)
 	{
 		if (IsInit())
 			return false;
 
 		m_ptrEngine = smeta3d::GetSingltonEngine();
 		if (m_ptrEngine)
-			m_ptrEngine->Init();
+			m_ptrEngine->Init(HWnd);
 
 		m_bInit = m_ptrEngine->IsInit();
 		return IsInit();

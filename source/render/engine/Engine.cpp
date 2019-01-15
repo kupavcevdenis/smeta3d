@@ -1,5 +1,7 @@
 #include "Engine.h"
 
+#include "gl_render_system/GLContext.h"
+
 namespace smeta3d
 {
 	/////////////////////////////////////////////////////////////////////
@@ -26,8 +28,9 @@ namespace smeta3d
 	/////////////////////////////////////////////////////////////////////
 	///
 
-	bool CEngine::Init()
+	bool CEngine::Init(const HWND& HWnd)
 	{
+		m_ptrContext = std::make_shared<GLContext>(HWnd);
 		return true;
 	}
 	/////////////////////////////////////////////////////////////////////
@@ -42,13 +45,14 @@ namespace smeta3d
 
 	void CEngine::DeInit()
 	{
+		m_ptrContext = nullptr;
 	}
 
 	/////////////////////////////////////////////////////////////////////
 	///
 	void CEngine::Update(float fTimePerSec)
 	{
-
+		m_ptrContext->Clear();
 	}
 	/////////////////////////////////////////////////////////////////////
 	///
@@ -61,20 +65,20 @@ namespace smeta3d
 	///
 	void CEngine::Render()
 	{
-
+		
 	}
 
 	/////////////////////////////////////////////////////////////////////
 	///
 	void CEngine::EndRender()
 	{
-
+		m_ptrContext->Swap();
 	}
 
 	/////////////////////////////////////////////////////////////////////
 	///
 	void CEngine::Resize(int w, int h)
 	{
-
+		m_ptrContext->Resize(w, h);
 	}
 }

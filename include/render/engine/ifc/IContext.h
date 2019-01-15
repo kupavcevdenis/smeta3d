@@ -8,7 +8,7 @@ namespace smeta3d
 	class IContext
 	{
 	public:
-		virtual ~IContext();
+		virtual ~IContext() {};
 		virtual void Clear() = 0;
 		virtual void Swap() = 0;
 		virtual void Resize(int w, int h) = 0;

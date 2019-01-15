@@ -12,12 +12,14 @@ int main(int argc, char *argv[])
 
 	SP_ICore ptrCore = GetSingltonCore();
 
-	ptrCore->Init();
+
 
 	CMainWindow w;
 
 	CContext* context = new CContext(&w);
 	w.setCentralWidget(context);
+
+	ptrCore->Init((HWND)context->winId());
 
 	w.show();
 	int nRet = a.exec();

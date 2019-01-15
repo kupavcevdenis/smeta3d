@@ -11,7 +11,7 @@ namespace smeta3d
 		public:
 			~ICore() {};
 
-			virtual bool Init() = 0;
+			virtual bool Init(const HWND& HWnd) = 0;
 			virtual bool IsInit() const  = 0;
 			virtual void DeInit() = 0;
 
@@ -30,7 +30,7 @@ namespace smeta3d
 }
 
 #define DECL_PUBLIC_ICORE \
-		bool Init(); \
+		bool Init(const HWND& HWnd); \
         bool IsInit() const; \
         void DeInit(); \
 	    const smeta3d::SP_IEngine& GetEngine() const; \

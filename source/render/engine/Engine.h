@@ -2,6 +2,7 @@
 #define ENGINE_H_
 
 #include "render/engine/ifc/IEngine.h"
+#include "render/engine/ifc/IContext.h"
 
 namespace smeta3d
 {
@@ -13,6 +14,9 @@ namespace smeta3d
 
 		DECL_PUBLIC_IENGINE
 
+	private:
+
+		std::shared_ptr<IContext> m_ptrContext;
 
 	};
 }

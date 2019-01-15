@@ -3,6 +3,7 @@
 
 
 #include <memory>
+#include <windows.h>
 
 namespace smeta3d
 {
@@ -12,7 +13,7 @@ namespace smeta3d
 	public:
 		~IEngine() {};
 
-		virtual bool Init() = 0;
+		virtual bool Init(const HWND& HWnd) = 0;
 		virtual bool IsInit() const = 0;
 		virtual void DeInit() = 0;
 
@@ -33,7 +34,7 @@ namespace smeta3d
 	SP_IEngine __declspec(dllexport) GetSingltonEngine();
 }
 #define DECL_PUBLIC_IENGINE \
-		bool Init(); \
+		bool Init(const HWND& HWnd); \
         bool IsInit() const; \
         void DeInit(); \
 	    void Update(float fTimePerSec); \

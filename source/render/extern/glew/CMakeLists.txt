@@ -7,6 +7,8 @@ file(GLOB SOURCES src/*.c)
 list(SORT HEADERS)
 list(SORT SOURCES)
 
+set(ADDITIONAL_COMPILE_FLAGS "${ADDITIONAL_COMPILE_FLAGS} -DGLEW_BUILD")
+
 add_library(glew SHARED ${HEADERS} ${SOURCES}) 
 ##set_executable_output_postfix( kernel)
 #set_version_and_label( ${CURRENT_LIBRARY_NAME} )
